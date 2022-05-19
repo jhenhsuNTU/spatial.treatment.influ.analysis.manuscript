@@ -1,5 +1,7 @@
-# Welcome to GitHub Desktop!
+# spatial.sampling.sim.manuscript
+Spatial treatment for the manuscript
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+Data and scripts for the simulation component of the spatial sampling simulation manuscript
+Data and scripts for the simulation component for the manuscript titled "Impacts of fisheries-dependent spatial sampling patterns on catch-per-unit-effort standardization: A simulation study and fishery application"  (https://doi.org/10.1016/j.fishres.2021.106169)
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+This repository is not maintained.
