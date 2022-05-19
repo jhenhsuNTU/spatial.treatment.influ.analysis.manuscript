@@ -10,7 +10,7 @@
 
  # loading the Pacific saury fishery data
  Ori_DATA <- read.table("C://Users//Jhen//Dropbox//MS_STD CPUE//DATA//saurydata_1997_2019.csv",header = TRUE, sep=",")
- Ori_DATA2 <- subset(Ori_DATA,Ori_DATA$total_catch>0 & Ori_DATA$SST>0 &Ori_DATA$Year>=1997 )
+ Ori_DATA2 <- subset(Ori_DATA, Ori_DATA$Year>=1997 )
  Ori_DATA2$CPUE <- Ori_DATA2$total_catch/Ori_DATA2$op_day
 
  # data for glmm model
