@@ -2,7 +2,7 @@
  #------------------------------------------------------------------------------
  # Author:Jhen Hsu
  # Date:05/10/2022
- # spatial clustering with weighting = 0.1
+ # spatial clustering with weighting = 1
  #------------------------------------------------------------------------------
  library(factoextra)
  library(NbClust)
