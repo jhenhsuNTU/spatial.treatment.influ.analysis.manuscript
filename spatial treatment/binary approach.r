@@ -1218,3 +1218,5 @@
 
  Report = data.frame(rbind(cut.1 = cut.1_result,cut.2 = cut.2_result,cut.3 = cut.3_result,
                          cut.4 = cut.4_result))
+
+
