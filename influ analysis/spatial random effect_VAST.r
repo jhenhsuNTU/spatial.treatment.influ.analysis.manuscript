@@ -135,3 +135,4 @@
  axis(side=1,at=c(1:20),labels=c(RESULT2$knot_group))
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1)
 
+
