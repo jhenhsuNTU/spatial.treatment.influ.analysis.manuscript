@@ -1,6 +1,5 @@
-
  #------------------------------------------------------------------------------
- # Author:Jhen Hsu
+ # Authors:Jhen Hsu, Yi-Jay Chang, Nicholas D.Ducharme-Barth
  # Date:05/10/2022
  # spatial clustering with weighting = 0.1
  #------------------------------------------------------------------------------
@@ -8,11 +7,8 @@
  library(NbClust)
  library(cluster)
 
- DATA <- read.table("C://Users//user//Dropbox//MS_STD CPUE//DATA//saurydata_1997_2019.csv",header = TRUE, sep=",")
- DATA2 <- subset(DATA,DATA$total_catch>0 & DATA$SST>0 & DATA$Month>=8 & DATA$Month<=11)
- 
- #path <- "C://Users//user//Dropbox//MS_STD CPUE//03_GLM spatial clustering//k=7_day_nomonth//"
- #setwd(path)
+ DATA = read.csv(".//fishery_data.csv",header=T,sep=",")
+ DATA2 <- DATA
 
  # aggregate original data into 0.25 grid
  catch = aggregate(DATA2$total_catch,by=list(DATA2$Lat0.25,DATA2$Lon0.25),FUN=sum)
@@ -77,5 +73,3 @@
                data = glmmdata,REML =T)
  print(AIC(CPUE_model))
  }
-
-
