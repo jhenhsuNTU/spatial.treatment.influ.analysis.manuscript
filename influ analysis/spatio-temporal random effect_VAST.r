@@ -114,3 +114,4 @@
  points(as.integer(distrs$focus),as.integer(distrs$term),cex=sqrt(distrs$prop)*6)
  axis(side=1,at=c(1:20),labels=c(1:20),cex.axis=1.2)
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1,cex.axis=1.2)
+
