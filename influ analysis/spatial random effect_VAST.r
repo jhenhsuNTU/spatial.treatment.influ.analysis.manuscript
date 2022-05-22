@@ -1,6 +1,5 @@
-
  #------------------------------------------------------------------------------
- # Author:Jhen Hsu
+ # Authors:Jhen Hsu, Yi-Jay Chang, Nicholas D.Ducharme-Barth
  # Date:05/10/2022
  # caculating the influence of spatial random effect in VAST
  # I followed the influnence formula from Bentley et al.(2012)
@@ -9,9 +8,9 @@
  library(PBSmapping)
 
  # loding the report, input data and spatial list data from VAST
- load("C:\\Users\\user\\Dropbox\\MS_STD CPUE\\Models\\04_VAST\\Optimized_data.RData")
- load("C:\\Users\\user\\Dropbox\\MS_STD CPUE\\Models\\04_VAST\\Data_Geostat.RData")
- load("C:\\Users\\user\\Dropbox\\MS_STD CPUE\\Models\\04_VAST\\Spatial_List.RData")
+ load(".\\Optimized_data.RData") # report
+ load(".\\Data_Geostat.RData")   # input data
+ load(".\\Spatial_List.RData")   # spatial list
 
  # loading the model output
  Coefficient = Optimized_data$Opt$par
@@ -23,7 +22,6 @@
  Opt = Optimized_data $ Opt
  Sdreport = Opt[["SD"]]
  SD = TMB::summary.sdreport(Sdreport)
-
  aa = row.names(SD)
 
  # loading the observed data with corrsponding knot
@@ -34,7 +32,6 @@
  omega = Report$Omega2_sc
  str(omega)
  omega_sd = Coefficient["L_omega2_z"]
-
  knot_id = as.numeric(levels(factor(DATA$knot_i)))
 
  DATA2 = NULL
@@ -101,7 +98,6 @@
  abline(h=1,lty=2,col="black")
  arrows(x0= RESULT$knot_group , y0=RESULT$stand_coef_LL , x1=RESULT$knot_group, y1=RESULT$stand_coef_UL ,
         col="black", lwd=1.5,code=3,angle=90, length=0.1)
- #write.table(RESULT2,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 4\\coef_vast_group2_v2.csv",sep=",")
 
  # influence plot
  delta_y_area = aggregate(DATA2$exp_rho_omega,by=list(DATA2$Year),FUN=mean)
@@ -113,8 +109,6 @@
  plot(delta_y_area$Year,delta_y_area$exp_delta_y_area,type="o",pch=19,col="black",
       ylab="Influence",xlab="Year",las=1,ylim=c(0.8,1.4),cex=1.5)
  abline(h=1,lty=2,col="black")
-
- #write.table(delta_y_area,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 4\\Influ_vast_v2.csv",sep=",")
 
  # data distribution
  DATA3 = NULL
@@ -133,8 +127,6 @@
  distrs2 = merge(distrs,aggregate(list(total=distrs$count),list(focus=distrs$focus),sum))
  distrs2$prop = with(distrs2,count/total)
 
- # write.table(distrs2,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 4\\distrs2_vast_group2_v2.csv",sep=",")
- 
  # plotting data distribution
  dev.new()
  plot(x=c(1:20),y=c(1997:2016),type="n",ylim=c(1997,2019),xlab="knot",ylab="Year",las=1,xaxt="n",yaxt="n")
@@ -142,3 +134,4 @@
  points(as.integer(distrs2$focus),as.integer(distrs2$term),cex=sqrt(distrs2$prop)*6)
  axis(side=1,at=c(1:20),labels=c(RESULT2$knot_group))
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1)
+
