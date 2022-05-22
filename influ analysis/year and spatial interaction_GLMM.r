@@ -154,3 +154,4 @@
  axis(side=1,at=c(1:4),labels=c("Area3","Area2","Area1","Area4"))
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1)
 
+      
