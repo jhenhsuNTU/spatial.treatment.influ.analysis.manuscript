@@ -1,6 +1,5 @@
-
  #------------------------------------------------------------------------------
- # Author:Jhen Hsu
+ # Authors:Jhen Hsu, Yi-Jay Chang, Nicholas D.Ducharme-Barth
  # Date:05/10/2022
  # caculating the influence of spatio-temporal random effect in VAST
  # I followed the influnence formula from Bentley et al.(2012)
@@ -8,8 +7,11 @@
  #------------------------------------------------------------------------------
  library(scales)
  library(dplyr)
- load("C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\Models\\04_VAST\\PS_day_nomonth\\Optimized_data.RData")
- load("C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\Models\\04_VAST\\PS_day_nomonth\\Data_Geostat.RData")
+
+ # loding the report, input data and spatial list data from VAST
+ load(".\\Optimized_data.RData") # report
+ load(".\\Data_Geostat.RData")   # input data
+ load(".\\Spatial_List.RData")   # spatial list
 
  # loading the model output
  Coefficient = Optimized_data$Opt$par
@@ -112,8 +114,3 @@
  points(as.integer(distrs$focus),as.integer(distrs$term),cex=sqrt(distrs$prop)*6)
  axis(side=1,at=c(1:20),labels=c(1:20),cex.axis=1.2)
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1,cex.axis=1.2)
-
-
-
-
-
