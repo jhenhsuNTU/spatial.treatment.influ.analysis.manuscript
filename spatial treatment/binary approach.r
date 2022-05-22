@@ -1,17 +1,15 @@
  #------------------------------------------------------------------------------
- # Author:Jhen Hsu
+ # Authors:Jhen Hsu, Yi-Jay Chang, Nicholas D.Ducharme-Barth
  # Date:05/10/2022
  # binary recursive approach
  #------------------------------------------------------------------------------
 
  # loading fishery data
- setwd("C://Users//user//Dropbox//MS_STD CPUE//02_GLM glm tree//no_month//")
- DATA = read.csv("C://Users//user//Dropbox//MS_STD CPUE//DATA//saurydata_1997_2019.csv",header=T,sep=",")
- DATA2 = subset(DATA,DATA$total_catch>0 & DATA$SST>0 & DATA$Month>=8 &DATA$Month<=11 )
+ DATA = read.csv(".//fishery_data.csv",header=T,sep=",")
+ DATA2 = DATA
 
  # determining the spatial resolution, here is 0.25 degree
  # beginning of latitude
-
  #------------------------------------------------------------------------------
  # Node 1 ; 2 areas
  #------------------------------------------------------------------------------
@@ -42,13 +40,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_2)
- v_id <- factor(ID)  }
+ }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  AIC_record = data.frame(AIC=rbind(AIC_record,temp_AIC))
@@ -99,14 +96,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_2)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -173,14 +168,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -230,14 +223,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -287,14 +278,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLM_model))
  temp_BIC = print(BIC(GLM_model))
@@ -344,14 +333,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -433,14 +420,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -490,14 +475,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -547,14 +530,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -604,14 +585,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -660,14 +639,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -716,14 +693,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -817,14 +792,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -873,14 +846,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -929,14 +900,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -986,14 +955,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -1043,14 +1010,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -1093,20 +1058,18 @@
 
  DATA4 = rbind(sel_data,retain_data)
 
-# prepare data for glmm ---------------------------------------------------------
+# prepare data for glmm --------------------------------------------------------
 
  # glmm data
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -1155,14 +1118,12 @@
  glmmdata <- within(
  DATA4,{
  Year <- factor(Year)
- Month <- factor(Month)
  Area <- factor(Area_tree)
- v_id <- factor(ID) # vessel id is random effect
  }
  )
 
  # GLMM model
- GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+SST+I(SST^2)+(1|v_id)+(1|Year:Area)-1,
+ GLMM_model <- lmer(log(total_catch/op_day) ~ Year+Area+(1|Year:Area)-1,
                data = glmmdata,REML =T)
  temp_AIC = print(AIC(GLMM_model))
  temp_BIC = print(BIC(GLMM_model))
@@ -1257,8 +1218,3 @@
 
  Report = data.frame(rbind(cut.1 = cut.1_result,cut.2 = cut.2_result,cut.3 = cut.3_result,
                          cut.4 = cut.4_result))
-
- # output results
- write.table(Report,"C://Users//user//Dropbox//MS_STD CPUE//02_GLM glm tree//no_month//report.csv",sep=",")
- write.table(DATA2,"C://Users//user//Dropbox//MS_STD CPUE//02_GLM glm tree//no_month//saurydata_1997_2019_GLM_tree0.25_BIC.csv",sep=",",row.names = F)
- 
