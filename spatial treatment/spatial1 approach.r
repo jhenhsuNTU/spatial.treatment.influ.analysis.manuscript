@@ -73,3 +73,5 @@
                data = glmmdata,REML =T)
  print(AIC(CPUE_model))
  }
+
+
