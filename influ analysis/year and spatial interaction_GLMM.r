@@ -1,17 +1,14 @@
-
  #------------------------------------------------------------------------------
- # Author: Jhen Hsu
+ # Authors:Jhen Hsu, Yi-Jay Chang, Nicholas D.Ducharme-Barth
  # Date:05/10/2022
  # caculating the influence of year x spatial interaction random effect in Ad hoc GLMM
  # same calculation process for other area stratification approaches (Binary, and Spatial clustering)
  # I followed the influnence formula from Bentley et al.(2012)
- # The influence analysis is showed by using Pacific saury fishery data
  #------------------------------------------------------------------------------
 
  # loading the Pacific saury fishery data
- Ori_DATA <- read.table("C://Users//Jhen//Dropbox//MS_STD CPUE//DATA//saurydata_1997_2019.csv",header = TRUE, sep=",")
- Ori_DATA2 <- subset(Ori_DATA, Ori_DATA$Year>=1997 )
- Ori_DATA2$CPUE <- Ori_DATA2$total_catch/Ori_DATA2$op_day
+ Ori_DATA <- read.csv(".//fishery_data.csv",header=T,sep=",")
+ Ori_DATA2 <- Ori_DATA
 
  # data for glmm model
  glmmdata <- within(
@@ -123,15 +120,10 @@
             pch = 21, add = TRUE,bg=c(RESULT3$COLS),cex=1.5)
  abline(h=1,lty=2,col="black")
 
- #write.table(RESULT3,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 5\\coef_adhoc.csv",sep=",",row.names =FALSE )
-
 #-----------------------------------------------------------
-
  # influence plot
  delta_y_int = aggregate(DATA4$ exp_rho_ya,by=list(DATA4$Year),FUN=mean)
  names(delta_y_int) <- c("Year","exp_delta_y_int")
-
- #write.table(delta_y_int,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 5\\influ_adhoc.csv",sep=",",row.names =FALSE )
 
  # plotting influence plot
  dev.new()
@@ -153,7 +145,6 @@
  tempdata$focus2 <- area_id[i]
  distrs2 = rbind(distrs2,tempdata)
  }
- # write.table(distrs2,"C:\\Users\\Jhen\\Dropbox\\MS_STD CPUE\\figure and tables codes\\figure 5\\distrs2_adhoc.csv",sep=",",row.names =FALSE )
 
  # plotting data distribution
  dev.new()
@@ -162,8 +153,4 @@
  points(as.integer(distrs2$focus2),as.integer(distrs2$term),cex=sqrt(distrs2$prop)*12)
  axis(side=1,at=c(1:4),labels=c("Area3","Area2","Area1","Area4"))
  axis(side=2,at=seq(1997,2019,by=3),labels=seq(1997,2019,by=3),las=1)
-
-
-
-
 
